@@ -21,21 +21,43 @@ export function renderStructure({
   values,
   visualId,
   sizeId,
-  emptyText,
   direction = "stack",
   colorClass = "",
 }) {
   const visual = document.getElementById(visualId);
   visual.classList.toggle("queue-visual", direction === "queue");
-  visual.innerHTML = values.length
-    ? values
-        .map((value, index) => {
-          const isNextOut =
-            direction === "queue" ? index === 0 : index === values.length - 1;
-          return `<div class="structure-item ${colorClass} ${isNextOut ? "next-out" : ""}">${escapeHtml(value)}</div>`;
-        })
-        .join("")
-    : `<span class="empty-state">${emptyText}</span>`;
+  if (values.length && direction === "queue") {
+    const columns = 6;
+    const rows = [];
+
+    for (let start = 0; start < values.length; start += columns) {
+      const row = values.slice(start, start + columns);
+      rows.push(
+        `<div class="queue-row">${row
+          .map((value, rowIndex) => {
+            const index = start + rowIndex;
+            const isNextOut = index === 0;
+            return `<div class="structure-item ${colorClass} ${isNextOut ? "next-out" : ""}">${escapeHtml(value)}</div>`;
+          })
+          .join("")}</div>`,
+      );
+    }
+
+    visual.innerHTML = rows.join("");
+  } else {
+    visual.innerHTML = values.length
+      ? values
+          .map((value, index) => {
+            const isNextOut = index === values.length - 1;
+            return `<div class="structure-item ${colorClass} ${isNextOut ? "next-out" : ""}">${escapeHtml(value)}</div>`;
+          })
+          .join("")
+      : "";
+    if (!values.length) {
+      const template = document.getElementById(visual.dataset.emptyTemplate);
+      visual.replaceChildren(template.content.cloneNode(true));
+    }
+  }
   document.getElementById(sizeId).textContent =
     `${values.length} elemento${values.length === 1 ? "" : "s"}`;
 }
@@ -55,9 +77,9 @@ export function copyCode(group) {
   const code = document.getElementById(`${group}-code`).textContent;
   const button = document.getElementById(`copy-${group}`);
   navigator.clipboard.writeText(code).then(() => {
-    button.textContent = "Copiado";
+    button.classList.add("copied");
     setTimeout(() => {
-      button.textContent = "Copiar";
+      button.classList.remove("copied");
     }, 1400);
   });
 }

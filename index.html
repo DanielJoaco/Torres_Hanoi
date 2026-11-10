@@ -33,16 +33,21 @@
           title="Cambiar tema"
           aria-pressed="false"
         >
-          <span class="theme-icon">Modo oscuro</span>
+          <span class="theme-icon theme-label-light">Modo oscuro</span>
+          <span class="theme-icon theme-label-dark">Modo claro</span>
         </button>
       </header>
       <section class="project-intro">
         <div>
           <span class="eyebrow">Estructuras de datos</span>
-          <h2 id="view-title">Teoría de pilas</h2>
+          <h2 id="view-title">
+            <span class="view-title active" data-view="stacks">Teoría de pilas</span>
+            <span class="view-title" data-view="queues">Teoría de colas</span>
+            <span class="view-title" data-view="hanoi">Minijuego: Torres de Hanoi</span>
+          </h2>
         </div>
         <p class="authors">
-          <strong>Integrantes</strong><br />Daniel Joaco · Mandius Fonseca
+          <strong>Integrantes</strong><br />Daniel Orjuela · Mandius Fonseca
         </p>
       </section>
       <main>
@@ -64,7 +69,10 @@
           <section class="code-panel">
             <div class="code-topline">
               <span class="section-kicker">Implementación Java</span
-              ><button class="copy-button" id="copy-stack">Copiar</button>
+              ><button class="copy-button" id="copy-stack">
+                <span class="copy-default">Copiar</span>
+                <span class="copy-success">Copiado</span>
+              </button>
             </div>
             <div class="code-tabs">
               <button
@@ -119,7 +127,14 @@
             </section>
             <div class="visual-panel stack-panel">
               <div class="panel-label">Representación · Cima</div>
-              <div id="stack-visual" class="structure-visual"></div>
+              <div
+                id="stack-visual"
+                class="structure-visual"
+                data-empty-template="stack-empty-template"
+              ></div>
+              <template id="stack-empty-template">
+                <span class="empty-state">La pila está vacía</span>
+              </template>
               <div class="structure-meta">
                 <span id="stack-size">0 elementos</span
                 ><span class="status-dot">Lista para probar</span>
@@ -145,7 +160,10 @@
           <section class="code-panel">
             <div class="code-topline">
               <span class="section-kicker">Implementación Java</span
-              ><button class="copy-button" id="copy-queue">Copiar</button>
+              ><button class="copy-button" id="copy-queue">
+                <span class="copy-default">Copiar</span>
+                <span class="copy-success">Copiado</span>
+              </button>
             </div>
             <div class="code-tabs">
               <button
@@ -203,7 +221,11 @@
               <div
                 id="queue-visual"
                 class="structure-visual queue-visual"
+                data-empty-template="queue-empty-template"
               ></div>
+              <template id="queue-empty-template">
+                <span class="empty-state">La cola está vacía</span>
+              </template>
               <div class="structure-meta">
                 <span id="queue-size">0 elementos</span
                 ><span class="status-dot">Lista para probar</span>
@@ -214,15 +236,16 @@
         <section id="hanoi-view" class="view">
           <div class="hanoi-intro">
             <div>
-              <span class="section-kicker">Módulo reservado · Canvas</span>
+              <span class="section-kicker">Minujuego</span>
               <h2>Torres de Hanoi</h2>
               <p>
-                Este espacio queda preparado para que el otro integrante del
-                equipo incorpore la lógica del minijuego.
+                Las Torres de Hanoi es un juego de lógica en el que se debe
+                trasladar una torre de discos desde un poste de origen hasta
+                uno de destino. Solo se puede mover un disco a la vez y nunca
+                se puede colocar un disco grande sobre uno pequeño. Este
+                canvas queda preparado para integrar la interacción del
+                minijuego.
               </p>
-            </div>
-            <div class="game-badge">
-              Canvas listo<br /><strong>960 × 520</strong>
             </div>
           </div>
           <div class="game-shell">
@@ -240,17 +263,10 @@
               >
             </div>
           </div>
-          <div class="module-note">
-            <span class="status-dot">Módulo preparado</span
-            ><span
-              >El canvas, el contenedor y el punto de inicialización ya están
-              definidos en el proyecto.</span
-            >
-          </div>
         </section>
       </main>
       <footer>
-        <span>Proyecto Final, estructura de datos. UIS 2026-2</span>
+        <span>Proyecto Final, Estructura de Datos. UIS 2026-2</span>
       </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>

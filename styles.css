@@ -107,6 +107,18 @@ pre::-webkit-scrollbar-thumb:hover {
 .theme-icon {
   font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
 }
+.theme-label-dark,
+.copy-success {
+  display: none;
+}
+body.dark-mode .theme-label-light,
+.copy-button.copied .copy-default {
+  display: none;
+}
+body.dark-mode .theme-label-dark,
+.copy-button.copied .copy-success {
+  display: inline;
+}
 .eyebrow,
 .section-kicker {
   display: block;
@@ -139,6 +151,12 @@ pre::-webkit-scrollbar-thumb:hover {
 }
 .view {
   display: none;
+}
+.view-title {
+  display: none;
+}
+.view-title.active {
+  display: inline;
 }
 .active-view {
   display: block;
@@ -383,14 +401,24 @@ pre code {
   padding: 20px 10px 5px;
 }
 .queue-visual {
-  flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
-  overflow-x: auto;
+  gap: 7px;
+  overflow: hidden;
+  width: 100%;
+}
+.queue-row {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  width: 100%;
+}
+.queue-row:nth-child(even) {
+  flex-direction: row-reverse;
 }
 .structure-item {
-  background: var(--orange);
-  color: #fff;
+  background: var(--blue);
+  color: #07131d;
   min-width: 88px;
   padding: 9px 16px;
   text-align: center;
@@ -398,14 +426,15 @@ pre code {
   box-shadow: 3px 3px 0 rgba(23, 32, 42, 0.12);
   animation: pop 0.25s ease;
 }
-.queue-visual .structure-item {
-  background: var(--teal);
+.queue-row .structure-item {
+  flex: 1 1 0;
+  min-width: 0;
 }
 .next-out {
-  background: var(--blue) !important;
-  color: #07131d !important;
+  background: var(--orange) !important;
+  color: #fff !important;
   box-shadow:
-    0 0 0 2px rgba(56, 189, 248, 0.25),
+    0 0 0 2px rgba(231, 104, 56, 0.25),
     3px 3px 0 rgba(23, 32, 42, 0.12);
 }
 @keyframes pop {

@@ -5,18 +5,12 @@ import { copyCode, renderStructure, showCode, writeConsole } from "./ui.js";
 
 const stack = new Stack();
 const queue = new Queue();
-const titles = {
-  stacks: "Teoría de pilas",
-  queues: "Teoría de colas",
-  hanoi: "Minijuego: Torres de Hanoi",
-};
 
 function renderStack() {
   renderStructure({
     values: stack.toArray(),
     visualId: "stack-visual",
     sizeId: "stack-size",
-    emptyText: "La pila está vacía",
   });
 }
 
@@ -25,7 +19,6 @@ function renderQueue() {
     values: queue.toArray(),
     visualId: "queue-visual",
     sizeId: "queue-size",
-    emptyText: "La cola está vacía",
     direction: "queue",
   });
 }
@@ -151,7 +144,12 @@ function changeView(view) {
     .forEach((section) =>
       section.classList.toggle("active-view", section.id === `${view}-view`),
     );
-  document.getElementById("view-title").textContent = titles[view];
+  document
+    .querySelectorAll(".view-title")
+    .forEach((title) =>
+      title.classList.toggle("active", title.dataset.view === view),
+    );
+  if (view === "queues") renderQueue();
 }
 
 function handleClick(event) {
@@ -174,13 +172,11 @@ function toggleTheme() {
   const isDark = document.body.classList.toggle("dark-mode");
   const toggle = document.getElementById("theme-toggle");
   toggle.setAttribute("aria-pressed", String(isDark));
-  toggle.querySelector(".theme-icon").textContent = isDark
-    ? "Modo claro"
-    : "Modo oscuro";
   localStorage.setItem("hanoi-theme", isDark ? "dark" : "light");
 }
 
 document.addEventListener("click", handleClick);
+window.addEventListener("resize", renderQueue);
 renderStack();
 renderQueue();
 showCode("stack", "stack", javaFiles);
