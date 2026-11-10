@@ -1,8 +1,3 @@
-import { Queue, Stack } from "./data-structures.js";
-import { javaFiles } from "./java-code.js";
-import { initializeHanoiCanvas } from "./hanoi-module.js";
-import { copyCode, renderStructure, showCode, writeConsole } from "./ui.js";
-
 const stack = new Stack();
 const queue = new Queue();
 

@@ -1,4 +1,4 @@
-export function escapeHtml(value) {
+function escapeHtml(value) {
   return String(value).replace(
     /[&<>"']/g,
     (char) =>
@@ -12,12 +12,12 @@ export function escapeHtml(value) {
   );
 }
 
-export function writeConsole(targetId, type, message) {
+function writeConsole(targetId, type, message) {
   const target = document.getElementById(targetId);
   target.innerHTML = `<span class="${type}">${escapeHtml(message)}</span>`;
 }
 
-export function renderStructure({
+function renderStructure({
   values,
   visualId,
   sizeId,
@@ -62,7 +62,7 @@ export function renderStructure({
     `${values.length} elemento${values.length === 1 ? "" : "s"}`;
 }
 
-export function showCode(group, file, javaFiles) {
+function showCode(group, file, javaFiles) {
   const code = document.getElementById(`${group}-code`);
   code.textContent = javaFiles[file];
   window.Prism?.highlightElement(code);
@@ -73,7 +73,7 @@ export function showCode(group, file, javaFiles) {
     );
 }
 
-export function copyCode(group) {
+function copyCode(group) {
   const code = document.getElementById(`${group}-code`).textContent;
   const button = document.getElementById(`copy-${group}`);
   navigator.clipboard.writeText(code).then(() => {
@@ -83,3 +83,8 @@ export function copyCode(group) {
     }, 1400);
   });
 }
+
+window.copyCode = copyCode;
+window.renderStructure = renderStructure;
+window.showCode = showCode;
+window.writeConsole = writeConsole;

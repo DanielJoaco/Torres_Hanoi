@@ -1,4 +1,4 @@
-export const javaFiles = {
+const javaFiles = {
   stack: `public class Pila {
     private Nodo tope;
 
@@ -94,3 +94,5 @@ export const javaFiles = {
     }
 }`,
 };
+
+window.javaFiles = javaFiles;

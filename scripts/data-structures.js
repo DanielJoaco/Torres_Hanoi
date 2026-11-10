@@ -1,4 +1,4 @@
-export class Stack {
+class Stack {
   #items = [];
 
   push(value) {
@@ -30,7 +30,7 @@ export class Stack {
   }
 }
 
-export class Queue {
+class Queue {
   #items = [];
 
   enqueue(value) {
@@ -61,3 +61,6 @@ export class Queue {
     return [...this.#items];
   }
 }
+
+window.Stack = Stack;
+window.Queue = Queue;
