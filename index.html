@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pilas, Colas y Torres de Hanoi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css"
+    />
+    <link rel="icon" type="image/svg+xml" href="hanoi-favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <nav class="main-nav" aria-label="Secciones del proyecto">
+          <button class="main-tab active" data-view="stacks">Pilas</button
+          ><button class="main-tab" data-view="queues">Colas</button
+          ><button class="main-tab" data-view="hanoi">Torres de Hanoi</button>
+        </nav>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Cambiar tema"
+          title="Cambiar tema"
+          aria-pressed="false"
+        >
+          <span class="theme-icon">Modo oscuro</span>
+        </button>
+      </header>
+      <section class="project-intro">
+        <div>
+          <span class="eyebrow">Estructuras de datos</span>
+          <h2 id="view-title">Teoría de pilas</h2>
+        </div>
+        <p class="authors">
+          <strong>Integrantes</strong><br />Daniel Joaco · Mandius Fonseca
+        </p>
+      </section>
+      <main>
+        <section id="stacks-view" class="view active-view">
+          <article class="theory-card">
+            <span class="section-kicker">LIFO · Last In, First Out</span>
+            <h2>Una pila siempre retira lo último que recibió.</h2>
+            <p>
+              Una pila organiza sus elementos como una torre: el dato que entra
+              primero queda al fondo y el último en entrar es el primero en
+              salir. Sus operaciones principales son <code>push</code>,
+              <code>pop</code>, <code>peek</code> e <code>isEmpty</code>.
+            </p>
+            <div class="concept-list">
+              <span>Entrada por la cima</span><span>Salida por la cima</span
+              ><span>Sin acceso aleatorio</span>
+            </div>
+          </article>
+          <section class="code-panel">
+            <div class="code-topline">
+              <span class="section-kicker">Implementación Java</span
+              ><button class="copy-button" id="copy-stack">Copiar</button>
+            </div>
+            <div class="code-tabs">
+              <button
+                class="code-tab active"
+                data-code-group="stack"
+                data-file="stack"
+              >
+                Pila.java</button
+              ><button
+                class="code-tab"
+                data-code-group="stack"
+                data-file="stack-node"
+              >
+                Nodo.java</button
+              ><button
+                class="code-tab"
+                data-code-group="stack"
+                data-file="stack-main"
+              >
+                Main.java
+              </button>
+            </div>
+            <pre><code id="stack-code" class="language-java"></code></pre>
+          </section>
+          <div class="interaction-row">
+            <section class="demo-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">Simulador en tiempo real</span>
+                  <h3>Opera la pila</h3>
+                </div>
+                <button class="ghost-button" data-action="stack-clear">
+                  Eliminar todos
+                </button>
+              </div>
+              <div class="controls">
+                <label class="input-label" for="stack-input">Dato</label
+                ><input
+                  id="stack-input"
+                  type="text"
+                  placeholder="Ej. 42"
+                  maxlength="18"
+                /><button class="action-button" data-action="stack-push">
+                  Apilar <span>↑</span></button
+                ><button class="outline-button" data-action="stack-pop">
+                  Desapilar <span>↓</span></button
+                ><button class="outline-button" data-action="stack-peek">
+                  Consultar cima
+                </button>
+              </div>
+              <div id="stack-console" class="console" aria-live="polite"></div>
+            </section>
+            <div class="visual-panel stack-panel">
+              <div class="panel-label">Representación · Cima</div>
+              <div id="stack-visual" class="structure-visual"></div>
+              <div class="structure-meta">
+                <span id="stack-size">0 elementos</span
+                ><span class="status-dot">Lista para probar</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="queues-view" class="view">
+          <article class="theory-card">
+            <span class="section-kicker">FIFO · First In, First Out</span>
+            <h2>Una cola atiende en el orden en que llegan los datos.</h2>
+            <p>
+              Una cola funciona como una fila: el primer elemento en llegar es
+              el primero en ser atendido. Las operaciones habituales son
+              <code>enqueue</code>, <code>dequeue</code>, <code>front</code>,
+              <code>size</code> e <code>isEmpty</code>.
+            </p>
+            <div class="concept-list">
+              <span>Entrada por el final</span><span>Salida por el frente</span
+              ><span>Atención ordenada</span>
+            </div>
+          </article>
+          <section class="code-panel">
+            <div class="code-topline">
+              <span class="section-kicker">Implementación Java</span
+              ><button class="copy-button" id="copy-queue">Copiar</button>
+            </div>
+            <div class="code-tabs">
+              <button
+                class="code-tab active"
+                data-code-group="queue"
+                data-file="queue"
+              >
+                Cola.java</button
+              ><button
+                class="code-tab"
+                data-code-group="queue"
+                data-file="queue-node"
+              >
+                Nodo.java</button
+              ><button
+                class="code-tab"
+                data-code-group="queue"
+                data-file="queue-main"
+              >
+                Main.java
+              </button>
+            </div>
+            <pre><code id="queue-code" class="language-java"></code></pre>
+          </section>
+          <div class="interaction-row">
+            <section class="demo-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">Simulador en tiempo real</span>
+                  <h3>Opera la cola</h3>
+                </div>
+                <button class="ghost-button" data-action="queue-clear">
+                  Eliminar todos
+                </button>
+              </div>
+              <div class="controls">
+                <label class="input-label" for="queue-input">Dato</label
+                ><input
+                  id="queue-input"
+                  type="text"
+                  placeholder="Ej. Turno A"
+                  maxlength="18"
+                /><button class="action-button" data-action="queue-enqueue">
+                  Encolar <span>→</span></button
+                ><button class="outline-button" data-action="queue-dequeue">
+                  Desencolar <span>←</span></button
+                ><button class="outline-button" data-action="queue-front">
+                  Consultar frente
+                </button>
+              </div>
+              <div id="queue-console" class="console" aria-live="polite"></div>
+            </section>
+            <div class="visual-panel queue-panel">
+              <div class="panel-label">Representación · Frente → Final</div>
+              <div
+                id="queue-visual"
+                class="structure-visual queue-visual"
+              ></div>
+              <div class="structure-meta">
+                <span id="queue-size">0 elementos</span
+                ><span class="status-dot">Lista para probar</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="hanoi-view" class="view">
+          <div class="hanoi-intro">
+            <div>
+              <span class="section-kicker">Módulo reservado · Canvas</span>
+              <h2>Torres de Hanoi</h2>
+              <p>
+                Este espacio queda preparado para que el otro integrante del
+                equipo incorpore la lógica del minijuego.
+              </p>
+            </div>
+            <div class="game-badge">
+              Canvas listo<br /><strong>960 × 520</strong>
+            </div>
+          </div>
+          <div class="game-shell">
+            <canvas
+              id="hanoi-canvas"
+              width="960"
+              height="520"
+              aria-label="Área reservada para el minijuego Torres de Hanoi"
+            ></canvas>
+            <div class="canvas-placeholder">
+              <span class="placeholder-icon">♜</span
+              ><strong>Área de juego disponible</strong
+              ><span
+                >La lógica de movimiento y las reglas se integrarán aquí.</span
+              >
+            </div>
+          </div>
+          <div class="module-note">
+            <span class="status-dot">Módulo preparado</span
+            ><span
+              >El canvas, el contenedor y el punto de inicialización ya están
+              definidos en el proyecto.</span
+            >
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>Proyecto Final, estructura de datos. UIS 2026-2</span>
+      </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+    <script type="module" src="scripts/app.js"></script>
+  </body>
+</html>
