@@ -15,7 +15,9 @@
       href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css"
     />
     <link rel="icon" type="image/svg+xml" href="hanoi-favicon.svg" />
-    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
     <div class="app-shell">
@@ -256,11 +258,7 @@
               aria-label="Área reservada para el minijuego Torres de Hanoi"
             ></canvas>
             <div class="canvas-placeholder">
-              <span class="placeholder-icon">♜</span
-              ><strong>Área de juego disponible</strong
-              ><span
-                >La lógica de movimiento y las reglas se integrarán aquí.</span
-              >
+              <div id="game-container"></div>
             </div>
           </div>
         </section>
@@ -271,10 +269,12 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
-    <script src="scripts/data-structures.js"></script>
-    <script src="scripts/java-code.js"></script>
-    <script src="scripts/hanoi-module.js"></script>
-    <script src="scripts/ui.js"></script>
-    <script src="scripts/app.js"></script>
+    <script src="src/scripts/data-structures.js"></script>
+    <script src="src/scripts/java-code.js"></script>
+    <script src="src/scripts/hanoi-module.js"></script>
+    <script src="src/scripts/ui.js"></script>
+    <script src="src/scripts/app.js"></script>
+    <script type="module" src="/src/main_game.js"></script>
+
   </body>
 </html>
