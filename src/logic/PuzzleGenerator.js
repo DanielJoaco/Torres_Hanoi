@@ -1,6 +1,6 @@
 import { Tower } from './Tower.js';
 import { HanoiGame } from './HanoiGame.js';
-import { createIngredient } from './ingredients.js';
+import { createIngredient } from './Ingredients.js';
 
 /**
  * order: arreglo de tipos (base -> tope), ya generado por generateOrder.

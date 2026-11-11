@@ -498,7 +498,6 @@ pre code {
   display: block;
   width: 100%;
   height: auto;
-  opacity: 0.16;
   background: linear-gradient(135deg, #27404b, #17212b);
 }
 .canvas-placeholder {

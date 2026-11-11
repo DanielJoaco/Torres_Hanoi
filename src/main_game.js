@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import './style.css';
+import './styles.css';
 
 import BootScene from './scenes/BootScene.js';
 import MenuScene from './scenes/MenuScene.js';

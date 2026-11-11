@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { COLORS, ING_HEIGHT } from './Constants.js';
-import { INGREDIENTS } from '../logic/ingredients.js';
+import { INGREDIENTS } from '../logic/Ingredients.js';
 
 const H = ING_HEIGHT - 4; // 36 px de alto
 
