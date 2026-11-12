@@ -12,7 +12,7 @@ import LEVELS from '../data/levels.json';
 const TOWER_X = [240, 640, 1040];
 const BASE_Y = 620;
 const TOWER_HEIGHT = 380;
-const CUSTOMER_POS = { x: 1130, y: 130 };
+const CUSTOMER_POS = { x: 1130, y: 150 };
 
 export default class GameScene extends Phaser.Scene {
   constructor() { super('GameScene'); }
@@ -123,7 +123,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.score += points;
     if (accuracy >= 0.5) this.served++;
-    this.scoreText.setText(`Puntos: ${this.score}`);
+  this.scoreText.setText(`★ ${this.score}`);
 
     if (perfect) {
       SFX.success();
@@ -189,34 +189,42 @@ drawTowers() {
   });
 }
 
-  drawHUD() {
-    this.customerText = this.add.text(20, 20, '', { fontSize: '26px', color: '#ffd166' });
-    this.scoreText = this.add.text(20, 56, 'Puntos: 0', { fontSize: '24px', color: '#ffffff' });
-    this.movesText = this.add.text(20, 90, 'Movimientos: 0', { fontSize: '22px', color: '#ffffff' });
+drawHUD() {
+  // --- Barra de fondo (depth bajo, para que los ingredientes arrastrados pasen por encima) ---
+  const g = this.add.graphics().setDepth(100);
+  g.fillStyle(0x000000, 0.55).fillRect(0, 0, 1280, 56);
+  g.fillStyle(0xffd166, 0.8).fillRect(0, 56, 1280, 3);
 
-    this.add.text(20, 135, '✔ Entregar', {
-      fontSize: '26px', color: '#ffffff', backgroundColor: '#2a9d8f', padding: { x: 12, y: 6 }
-    }).setInteractive({ useHandCursor: true })
-      .on('pointerdown', () => this.deliver());
+  // --- Información (izquierda) ---
+  const info = { fontSize: '22px', color: '#ffffff' };
+  this.customerText = this.add.text(20, 28, '', { ...info, color: '#ffd166', fontStyle: 'bold' })
+    .setOrigin(0, 0.5).setDepth(101);
+  this.scoreText = this.add.text(560, 28, '★ 0', info).setOrigin(0, 0.5).setDepth(101);
+  this.movesText = this.add.text(700, 28, '↔ 0', info).setOrigin(0, 0.5).setDepth(101);
 
-    const muteBtn = this.add.text(1260, 120, SFX.isMuted() ? '🔇' : '🔊', {
-  fontSize: '28px', backgroundColor: '#555', padding: { x: 10, y: 4 }
-}).setOrigin(1, 0).setInteractive({ useHandCursor: true });
+  // --- Botones (derecha) ---
+  const deliver = this.hudButton(1000, 'Entregar', 0x2a9d8f, () => this.deliver(), 140);
+  this.hudButton(1120, '↻', 0x555555, () => this.scene.restart({ level: this.levelIndex }));
+  this.hudButton(1180, '☰', 0x555555, () => this.scene.start('LevelSelectScene'));
+  const mute = this.hudButton(1240, SFX.isMuted() ? '🔇' : '🔊', 0x555555, () => {
+    mute.setText(SFX.toggleMute() ? '🔇' : '🔊');
+  });
+}
 
-muteBtn.on('pointerdown', () => {
-  muteBtn.setText(SFX.toggleMute() ? '🔇' : '🔊');
-});
+// Botón compacto de la barra superior
+hudButton(x, label, color, onClick, width = 48) {
+  const btn = this.add.text(x, 28, label, {
+    fontSize: '24px', color: '#ffffff', fontStyle: 'bold',
+    backgroundColor: Phaser.Display.Color.IntegerToColor(color).rgba,
+    fixedWidth: width, fixedHeight: 40, align: 'center',
+    padding: { y: 6 }
+  }).setOrigin(0.5).setDepth(101).setInteractive({ useHandCursor: true });
 
-    this.add.text(1260, 20, '↻ Reiniciar', {
-      fontSize: '24px', color: '#ffffff', backgroundColor: '#555', padding: { x: 12, y: 6 }
-    }).setOrigin(1, 0).setInteractive({ useHandCursor: true })
-      .on('pointerdown', () => this.scene.restart({ level: this.levelIndex }));
-
-    this.add.text(1260, 70, '☰ Niveles', {
-      fontSize: '24px', color: '#ffffff', backgroundColor: '#555', padding: { x: 12, y: 6 }
-    }).setOrigin(1, 0).setInteractive({ useHandCursor: true })
-      .on('pointerdown', () => this.scene.start('LevelSelectScene'));
-  }
+  btn.on('pointerover', () => btn.setAlpha(0.8));
+  btn.on('pointerout', () => btn.setAlpha(1));
+  btn.on('pointerdown', onClick);
+  return btn;
+}
 
   // ---------- Vistas de ingredientes ----------
   clearViews() {
@@ -259,7 +267,7 @@ muteBtn.on('pointerdown', () => {
         }
       });
     });
-    this.movesText.setText(`Movimientos: ${this.hanoi.moves}`);
+      this.movesText.setText(`↔ ${this.hanoi.moves}`);
   }
 
   // ---------- Drag & drop ----------
@@ -322,17 +330,18 @@ muteBtn.on('pointerdown', () => {
     const shade = this.add.rectangle(640, 360, 1280, 720, 0x000000, 0.85)
       .setDepth(3000).setInteractive();
 
-    const text = this.add.text(640, 300, [
-      '¡Bienvenido al restaurante!',
-      '',
-      'Arma la hamburguesa del cliente en el plato (torre de la derecha).',
-      'Solo puedes mover el ingrediente de ARRIBA de cada torre.',
-      '',
-      'Regla: nunca pongas un ingrediente de arriba debajo de uno de abajo.',
-      'Orden de abajo hacia arriba: pan › vegetales › carne › salsas.',
-      '',
-      'Usa la torre del medio como ayuda. ¡Y cuidado con la paciencia!'
-    ], {
+    const text = this.add.text(640, 300,[
+  '¡Bienvenido al restaurante!',
+  '',
+  'Arma la hamburguesa del pedido en el plato (torre de la derecha).',
+  'Todo pedido lleva pan, vegetal, carne y salsa.',
+  'Solo puedes mover el ingrediente de ARRIBA de cada torre.',
+  '',
+  'Regla: nunca pongas un ingrediente de arriba debajo de uno de abajo.',
+  'Orden de abajo hacia arriba: pan › vegetales › carne › salsas.',
+  '',
+  'Usa la torre del medio como ayuda. ¡Y cuidado con la paciencia!'
+], {
       fontSize: '28px', color: '#ffffff', align: 'center', lineSpacing: 8
     }).setOrigin(0.5).setDepth(3001);
 

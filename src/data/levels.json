@@ -1,25 +1,25 @@
 [
-  { "name": "Primer día",       "customers": 3, "ingredientsPerOrder": 4, "patience": 90, "shuffleMoves": 20,
-    "availableTypes": ["pan", "lechuga", "carne", "ketchup"] },
+  { "name": "Primer día",   "customers": 3, "ingredientsPerOrder": 4, "patience": 90, "shuffleMoves": 20,
+    "availableTypes": ["pan", "lechuga", "carne", "ketchup", "mostaza"] },
 
-  { "name": "Con queso",        "customers": 3, "ingredientsPerOrder": 4, "patience": 80, "shuffleMoves": 25,
-    "availableTypes": ["pan", "lechuga", "carne", "queso", "ketchup"] },
+  { "name": "Con queso",    "customers": 3, "ingredientsPerOrder": 5, "patience": 90, "shuffleMoves": 28,
+    "availableTypes": ["pan", "lechuga", "carne", "queso", "ketchup", "mostaza"] },
 
-  { "name": "Fresquito",        "customers": 4, "ingredientsPerOrder": 5, "patience": 80, "shuffleMoves": 30,
-    "availableTypes": ["pan", "lechuga", "tomate", "carne", "queso", "ketchup"] },
-
-  { "name": "Picante",          "customers": 4, "ingredientsPerOrder": 5, "patience": 70, "shuffleMoves": 35,
+  { "name": "Fresquito",    "customers": 4, "ingredientsPerOrder": 6, "patience": 90, "shuffleMoves": 36,
     "availableTypes": ["pan", "lechuga", "tomate", "carne", "queso", "ketchup", "mostaza"] },
 
-  { "name": "Hora pico",        "customers": 5, "ingredientsPerOrder": 6, "patience": 70, "shuffleMoves": 40,
+  { "name": "Con cebolla",  "customers": 4, "ingredientsPerOrder": 6, "patience": 85, "shuffleMoves": 40,
     "availableTypes": ["pan", "lechuga", "tomate", "cebolla", "carne", "queso", "ketchup", "mostaza"] },
 
-  { "name": "Pollo frito",      "customers": 5, "ingredientsPerOrder": 6, "patience": 60, "shuffleMoves": 45,
+  { "name": "Hora pico",    "customers": 5, "ingredientsPerOrder": 7, "patience": 85, "shuffleMoves": 48,
+    "availableTypes": ["pan", "lechuga", "tomate", "cebolla", "carne", "queso", "ketchup", "mostaza"] },
+
+  { "name": "Pollo frito",  "customers": 5, "ingredientsPerOrder": 7, "patience": 80, "shuffleMoves": 52,
     "availableTypes": ["pan", "lechuga", "tomate", "cebolla", "carne", "pollo", "queso", "ketchup", "mostaza"] },
 
-  { "name": "Menú completo",    "customers": 6, "ingredientsPerOrder": 7, "patience": 60, "shuffleMoves": 50,
+  { "name": "Menú completo","customers": 6, "ingredientsPerOrder": 8, "patience": 80, "shuffleMoves": 60,
     "availableTypes": ["pan", "lechuga", "tomate", "cebolla", "carne", "pollo", "queso", "ketchup", "mostaza", "mayonesa"] },
 
-  { "name": "Chef supremo",     "customers": 6, "ingredientsPerOrder": 8, "patience": 55, "shuffleMoves": 60,
+  { "name": "Chef supremo", "customers": 6, "ingredientsPerOrder": 9, "patience": 75, "shuffleMoves": 70,
     "availableTypes": ["pan", "lechuga", "tomate", "cebolla", "carne", "pollo", "queso", "ketchup", "mostaza", "mayonesa"] }
 ]

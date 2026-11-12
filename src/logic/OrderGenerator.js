@@ -1,4 +1,4 @@
-import { INGREDIENTS } from './Ingredients.js';
+import { INGREDIENTS, LEVELS } from './ingredients.js';
 
 function shuffle(arr, rng = Math.random) {
   const a = [...arr];
@@ -10,19 +10,30 @@ function shuffle(arr, rng = Math.random) {
 }
 
 /**
- * Genera un pedido: arreglo de tipos ordenado de BASE a TOPE.
- * Siempre empieza con pan, y el resto queda ordenado por nivel (mayor a menor).
+ * Pedido de BASE a TOPE. Siempre incluye pan, al menos un vegetal,
+ * al menos una carne y al menos una salsa.
  */
 export function generateOrder({ ingredientCount, availableTypes, rng = Math.random }) {
-  const pool = availableTypes.filter(t => t !== 'pan');
-  if (pool.length === 0) throw new Error('No hay ingredientes disponibles');
+  const ofLevel = (lvl) => availableTypes.filter(t => INGREDIENTS[t].level === lvl);
+  const veggies = ofLevel(LEVELS.VEGETAL);
+  const meats = ofLevel(LEVELS.CARNE);
+  const sauces = ofLevel(LEVELS.SALSA);
 
-  const extras = [];
-  for (let i = 0; i < ingredientCount - 1; i++) {
-    extras.push(pool[Math.floor(rng() * pool.length)]);
+  if (!veggies.length || !meats.length || !sauces.length) {
+    throw new Error('availableTypes debe incluir al menos un vegetal, una carne y una salsa');
   }
 
-  // Mezcla y luego ordena por nivel (sort estable: dentro del mismo nivel queda aleatorio)
+  const pick = (arr) => arr[Math.floor(rng() * arr.length)];
+
+  // Obligatorios
+  const extras = [pick(veggies), pick(meats), pick(sauces)];
+
+  // Relleno hasta completar la cantidad pedida (el pan cuenta como 1)
+  const pool = availableTypes.filter(t => t !== 'pan');
+  const total = Math.max(ingredientCount, 4);
+  while (extras.length < total - 1) extras.push(pick(pool));
+
+  // Mezcla y ordena por nivel (estable: dentro de la misma categoría queda aleatorio)
   const sorted = shuffle(extras, rng)
     .sort((a, b) => INGREDIENTS[b].level - INGREDIENTS[a].level);
 
