@@ -10,8 +10,8 @@ import LevelSelectScene from './scenes/LevelSelectScene.js';
 const config = {
   type: Phaser.AUTO,
   parent: 'game-container',
-  width: 1088,
-  height: 612,
+  width: 1280,
+  height: 720,
   backgroundColor: '#2b2d42',
   scale: {
     mode: Phaser.Scale.FIT,

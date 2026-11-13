@@ -489,8 +489,6 @@ pre code {
 }
 .game-shell {
   position: relative;
-  width: min(100%, 1088px);
-  margin-inline: auto;
   background: #202b35;
   border: 1px solid var(--ink);
   box-shadow: var(--shadow);
