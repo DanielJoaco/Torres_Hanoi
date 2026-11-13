@@ -1,4 +1,4 @@
-import { INGREDIENTS, LEVELS } from './ingredients.js';
+import { INGREDIENTS, LEVELS } from './Ingredients.js';
 
 function shuffle(arr, rng = Math.random) {
   const a = [...arr];
